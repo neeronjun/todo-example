@@ -4,7 +4,7 @@ from bottle import route, run, debug, template, request, default_app
 @route('/todo')
 @route('/my_todo_list')
 def todo_list():
-    conn = sqlite3.connect('/home/neeronjun/mysite/todo-example/todo.db')
+    conn = sqlite3.connect('todo.db')
     c = conn.cursor()
     c.execute("SELECT id, task FROM todo WHERE status LIKE '1'")
     result = c.fetchall()
@@ -31,7 +31,7 @@ def new_item():
     if request.GET.save:
 
         new_task = request.GET.new_task.strip()
-        conn = sqlite3.connect('/home/neeronjun/mysite/todo-example/todo.db')
+        conn = sqlite3.connect('todo.db')
         c = conn.cursor()
 
         c.execute("INSERT INTO todo (task,status) VALUES (?,?)", (new_task,1))
